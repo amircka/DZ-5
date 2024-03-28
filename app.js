@@ -1,70 +1,66 @@
 let tags = ['li', 'div', 'li', 'p', 'h1', 'p', 'h1', 'div', 'div', 'li', 'h1', 'p', 'h1', 'ol', 'br'];
 let tagCounts = {};
-for( let tag of tags) {
+
+for (let tag of tags) {
     if (tagCounts[tag]) {
-        tagCounts[tag] ++
+        tagCounts[tag]++;
     } else {
         tagCounts[tag] = 1;
     }
 }
-console.log(tagCounts);
+let sortedTagCounts = Object.entries(tagCounts).sort((a, b) => b[1] - a[1]);
+let sortedTagCountsObject = Object.fromEntries(sortedTagCounts);
+console.log(sortedTagCountsObject);
+
+// У
 
 
+function filterBooks(...books) {
+    const booksY = [];
+    const otherBooks = [];
 
-const firstArray = [1, 2, 3, 45, 32, 56, 61, 23, 12, 2, 34, 5, 6, 3, 76, 67, 87, 76];
-const secondArray = [1, 45, 32, 3, 4, 2, 56, 76, 67, 87, 89, 8, 56, 54];
-
-function findCommonElements(arr1, arr2) {
-    const commonElements = [];
-    for (let i = 0; i < arr1.length; i++) {
-        if (arr2.includes(arr1[i]) && !commonElements.includes(arr1[i])) {
-            commonElements.push(arr1[i]);
+    for (let book of books) {
+        if (book.toLowerCase().includes('у')) {
+            booksY.push(book)
+        } else {
+            otherBooks.push(book)
         }
     }
-    return commonElements;
+    console.log("Книги с буквой 'у':", booksY);
+    console.log("Остальные книги:", otherBooks);
 }
 
-const commonElementsArray = findCommonElements(firstArray, secondArray);
-console.log("Общие элементы:", commonElementsArray);
+filterBooks('Богатый папа, бедный папа','Мост','Аррифуретта сильнейший ремеслиник','День у','Морской охотник','Ученье','Кухня','Мег');
 
 
+OBJECT
 
-function averageOfPositiveNumbers(arr) {
-    let sum = 0
-    let count = 0
-
-    for (let i = 0; i < arr.length; i++) {
-        if (arr[i] > 0) {
-            sum += arr[i];
-            count++
-        }
+const courses = [
+    {
+        courseName: 'JavaScript',
+        students: [
+            { name: 'John', grades: [60, 55, 95] },
+            { name: 'Jack', grades: [59, 90, 95] }
+        ]
+    },
+    {
+        courseName: 'Python',
+        students: [
+            { name: 'Mark', grades: [78, 82, 80] },
+            { name: 'Alice', grades: [85, 88, 90] }
+        ]
     }
+];
 
-    if (count === 0) {
-        return "Нет";
+const coursesWith = courses.map(course => {
+    const averegeGrade = course.students.map(stydent => {
+        const averegeGrade = stydent.grades.reduce((sum, grade) => sum + grade, 0) / stydent.grades.length
+        return{ name: stydent.name, averegeGrade: averegeGrade}
+    })
+    return {
+        courseName: course.courseName,
+        students: averegeGrade
     }
-    return sum / count;
-}
-const numbers = [2, -78, 45, 4, -7, -6, -10, 26, 30, 8];
-console.log(averageOfPositiveNumbers(numbers));
+})
 
-
-function filterWordsWithTA(arr) {
-    var filteredArray = [];
-
-    for (var i = 0; i < arr.length; i++) {
-        var word = arr[i].toLowerCase();
-
-        if (word.includes('t') && word.includes('a')) {
-            filteredArray.push(arr[i]);
-        }
-    }
-
-    return filteredArray;
-}
-
-var words = ['text', 'frontend', 'apple', 'banana', 'cat', 'Dog'];
-var filteredWords = filterWordsWithTA(words);
-console.log(filteredWords); // Вывод: ['text', 'frontend', 'cat']
-
-//fff
+console.log(coursesWith)
